@@ -2,24 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('biodata', {
+    await queryInterface.createTable('Majors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER
+      major_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      age: {
-        type: Sequelize.INTEGER
+      major_description: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      address: {
-        type: Sequelize.STRING
-      },
-      citizenship: {
-        type: Sequelize.STRING
+      major_picture: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: "default.png"
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('biodata');
+    await queryInterface.dropTable('Majors');
   }
 };

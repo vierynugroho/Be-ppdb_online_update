@@ -1,10 +1,10 @@
 const { where } = require("sequelize");
-const {major} = require ("../models")
+const {Majors} = require ("../models")
 const ApiError = require ("../utils/apiError")
 
 const getAllMajors = async (req, res, next) => {
     try {
-        const allMajors = await major.findAll();
+        const allMajors = await Majors.findAll();
 
         res.status(200).json({
             status: "Success",
@@ -21,7 +21,7 @@ const getAllMajors = async (req, res, next) => {
 const getMajorById = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const findMajor = await major.findOne({
+        const findMajor = await Majors.findOne({
             where: {
                 id,
             }
@@ -32,7 +32,7 @@ const getMajorById = async (req, res, next) => {
         res.status(200).json({
             status: "Success",
             message: `Major with id '${id}' successfully retrieved`,
-            requstAt:req. requestTime,
+            requestAt:req. requestTime,
             data: {findMajor}
         });
     }catch(err){
@@ -41,14 +41,14 @@ const getMajorById = async (req, res, next) => {
 
 }
 const createMajor = async (req, res, next) => {
-    const {name, description} = req.body;
+    const {major_name, major_description} = req.body;
     try {
         const data = {
-            name,
-            description,
+            major_name,
+            major_description,
         }
         console.log(data);
-        const newMajor = await major.create(data);
+        const newMajor = await Majors.create(data);
 
         res.status(201).json({
             status: "Success",
@@ -61,52 +61,38 @@ const createMajor = async (req, res, next) => {
 
 };
 const updateMajor = async (req, res, next) => {
+    const{major_name, major_description} = req.body;
     try{
-        const {name, description} = req.body;
         const id = req.params.id;
-        const findMajor = await major.findOne({
+        const findMajor = await Majors.findOne({
             where:{
                 id,
             }
-        })
+        });
         if (!findMajor){
-            return next (new ApiError(`Major with id '${id}' not found`))
+            return next (new ApiError(`Major with id '${id}' not found`, 404))
         }
+        await Majors.update({
+            major_name,
+            major_description
 
-        await major.update({
-            name,
-            description
-
-        },
-        {
+        },{
             where: {
                 id,
-            },
+            }
         })
-
-        await major.update({
-            name,
-            description
-        },{
-            where:{
+        const updateMajor= await Majors.findOne({
+            where: {
                 id,
-            },
-        }
-    )
+            }
+        });
 
-    const updateMajor = await major.findOne({
-        where: {
-            id,
-        },
-    });
-    res.status(200).json({
-        status:"Success",
-        message: `Major with id '${id}' successfully updated`,
-        requestAt: req.requestTime,
-        data: {
-            updateMajor
-        }
-    })
+        res.status(200).json({
+            status: "Success",
+            message: "Major Successfully",
+            requestAt: req.requestTime,
+            data:{updateMajor}
+        })
     }catch (err) {
         return next (new ApiError (err.message,400))
     }
@@ -119,7 +105,7 @@ const deleteMajor = async  (req, res, next) => {
             return next (new ApiError (`Major with id '${id}' not found`))
         }
 
-        await major.destroy({
+        await Majors.destroy({
             where:{
                 id: req.params.id,
             },
@@ -128,7 +114,7 @@ const deleteMajor = async  (req, res, next) => {
         res.status(200).json({
             status: "Success",
             message: "Major successfully deleted",
-            reuestAt: req.requestTime
+            requestAt: req.requestTime
         })
     }catch(err){
         return next (new ApiError (err.message, 400))

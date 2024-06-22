@@ -7,16 +7,17 @@ module.exports = {
 
     for (let i = 1; i <= 5; i++){
       majorData.push({
-        name: ` Major ${i}`,
-        description:'',
+        major_name: ` Major ${i}`,
+        major_description:'',
+        major_picture:'default.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       })
     }
-    return queryInterface.bulkInsert('major', majorData);
+    return queryInterface.bulkInsert('Majors', majorData);
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('major', null, {});
+    return queryInterface.bulkDelete('Majors', null, {});
   }
 };
