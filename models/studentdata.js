@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
           name: "adminStudentFinalScore_id",
         }
       });
-      studentData.hasOne(models.studentImage,{
+      studentData.hasOne(models.StudentImage,{
         foreignKey: {
           name: "studentData_id",
         }
       });
-      studentData.hasOne(models.studentReportScore,{
+      studentData.hasOne(models.studentReportScores,{
         foreignKey: {
           name: "studentData_id"
         }
