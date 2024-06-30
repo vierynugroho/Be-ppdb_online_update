@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const {Majors} = require ("../models")
 const ApiError = require ("../utils/apiError")
 
@@ -17,7 +16,6 @@ const getAllMajors = async (req, res, next) => {
         return next (new ApiError(err.message, 400))
     }
 };
-
 const getMajorById = async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -39,7 +37,7 @@ const getMajorById = async (req, res, next) => {
         return next (new ApiError(err.message, 400))
     }
 
-}
+};
 const createMajor = async (req, res, next) => {
     const {major_name, major_description} = req.body;
     try {
@@ -96,7 +94,7 @@ const updateMajor = async (req, res, next) => {
     }catch (err) {
         return next (new ApiError (err.message,400))
     }
-}
+};
 const deleteMajor = async  (req, res, next) => {
     try{
         const Major = await major.findByPk(req.params.id);
@@ -119,7 +117,7 @@ const deleteMajor = async  (req, res, next) => {
     }catch(err){
         return next (new ApiError (err.message, 400))
     }
-}
+};
 
 module.exports = {
     getAllMajors,

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Majors extends Model {
+  class users extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,30 +11,37 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Majors.belongsTo(models.users, {
+      /**
+         * setiap objek User hanya memiliki satu objek Auth yang terkait dengannya.
+     */
+      users.hasOne(models.auths, {
         foreignKey: {
-          name:user_id,
+          name: "user_id"
+        }
+      });
+      users.hasOne(models.studentData, {
+        foreignKey: {
+          name: "user_id"
         }
       })
     }
   }
-  Majors.init({
-    major_name:  {
+  users.init(
+    {
+    full_name: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull: false,
     },
-    major_description: {
-      type: DataTypes.STRING,
-      allowNull:false,
+    user_role:{
+      type:DataTypes.ENUM('admin','member')
     },
-    major_picture: {
+    age: {
       type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: "default.png",
+      allowNull: false,
     },
   }, {
     sequelize,
-    modelName: 'Majors',
+    modelName: 'users',
   });
-  return Majors;
+  return users;
 };

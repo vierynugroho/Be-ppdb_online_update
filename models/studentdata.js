@@ -1,5 +1,5 @@
 'use strict';
-const {Model,Sequelize} = require('sequelize');
+const {Model,Sequelize, STRING} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class studentData extends Model {
     /**
@@ -8,10 +8,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      studentData.belongsTo(models.users,{
+        foreignKey: "user_id"
+      });
+      studentData.belongsTo(models.AdminStudentFinalScore,{
+        foreignKey: {
+          name: "adminStudentFinalScore_id",
+        }
+      });
+      studentData.hasOne(models.studentImage,{
+        foreignKey: {
+          name: "studentData_id",
+        }
+      });
+      studentData.hasOne(models.studentReportScore,{
+        foreignKey: {
+          name: "studentData_id"
+        }
+      })
+
     }
   }
   studentData.init({
+    user_id:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    adminStudentFinalScore_id:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     student_name: {
         type: Sequelize.STRING,
         allowNull: false,
