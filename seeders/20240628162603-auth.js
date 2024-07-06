@@ -14,12 +14,12 @@ module.exports = {
       {
         full_name: "endUser",
         age: "22 tahun",
-        user_role:'member',
+        user_role:'student',
         createdAt: new Date(),
         updatedAt: new Date(),
       }
     ];
-    const insertUser = await queryInterface.bulkInsert("users", users, {
+    const insertUser = await queryInterface.bulkInsert("Users", users, {
       returning : true,
     });
 
@@ -40,14 +40,14 @@ module.exports = {
 				updatedAt: new Date(),
       }
     });
-    const userAuth = await queryInterface.bulkInsert('auths', userDataAuth, {
+    const userAuth = await queryInterface.bulkInsert('Auths', userDataAuth, {
       returning: true,
     })
 
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('users', null, {returning: true});
-    await queryInterface.bulkDelete('auths', null, {returning:true});
+    await queryInterface.bulkDelete('Users', null, {returning: true});
+    await queryInterface.bulkDelete('Auths', null, {returning:true});
   }
 };
