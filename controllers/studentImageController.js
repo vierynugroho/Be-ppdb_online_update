@@ -4,7 +4,7 @@ const handleUploadImage = require('../utils/handleUpload');
 
 const createImage = async (req, res, next) => {
 	try {
-		files = req.files;
+		let files = req.files;
 		const student_picture = files['student_picture'];
 		const ijazah_picture = files['ijazah_picture'];
 		const family_card = files['family_card'];
@@ -15,6 +15,7 @@ const createImage = async (req, res, next) => {
 		if (!student_picture || !ijazah_picture || !family_card || !graduation_certificate || !graduation_certificate_highSchool || !report_scores) {
 			return next(new ApiError('All files must be uploaded', 422));
 		}
+
 		// Mengunggah setiap file ke ImageKit dan mendapatkan URL dan ID gambar
 		const studentPicture = await handleUploadImage(student_picture);
 		const ijazahPicture = await handleUploadImage(ijazah_picture);
@@ -33,6 +34,7 @@ const createImage = async (req, res, next) => {
 			graduation_certificate_highSchool: graduationCertificateHS.imagesUrl,
 			report_scores: reportScores.imagesUrl,
 		});
+
 		res.status(200).json({
 			status: 'Success',
 			message: 'Student image successfully created',
