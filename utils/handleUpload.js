@@ -18,6 +18,7 @@ const handleUploadImage = async (files) => {
 			imagesId.push(uploadedImage.fileId);
 		})
 	);
+
 	return { imagesUrl, imagesId };
 };
 
