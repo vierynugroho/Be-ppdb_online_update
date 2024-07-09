@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       studentData.belongsTo(models.User,{
         foreignKey: "user_id"
       });
-      studentData.belongsTo(models.AdminStudentFinalScore,{
-        foreignKey: {
-          name: "adminStudentFinalScore_id",
-        }
-      });
       studentData.hasOne(models.StudentImage,{
         foreignKey: {
           name: "studentData_id",
@@ -26,16 +21,11 @@ module.exports = (sequelize, DataTypes) => {
           name: "studentData_id"
         }
       })
-
     }
   }
   studentData.init({
     user_id:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    adminStudentFinalScore_id:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     student_name: {

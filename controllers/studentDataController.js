@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const { studentData } = require("../models");
 const ApiError = require("../utils/apiError");
 
@@ -41,6 +40,7 @@ const getStudentDataById = async (req, res, next) => {
   }
 };
 const createStudentData = async (req, res, next) => {
+  const user_id = 1
   const {
     student_name,
     student_gender,
@@ -76,6 +76,7 @@ const createStudentData = async (req, res, next) => {
 
   try {
     const newStudentData = await studentData.create({
+      user_id,
       student_name,
       student_gender,
       place_birth,
@@ -120,6 +121,7 @@ const createStudentData = async (req, res, next) => {
   }
 };
 const updateStudentData = async (req, res, next) => {
+  const user_id = 1
   const {
     student_name,
     student_gender,
@@ -164,6 +166,7 @@ const updateStudentData = async (req, res, next) => {
     }
     await studentData.update(
       {
+        user_id,
         student_name,
         student_gender,
         place_birth,

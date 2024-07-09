@@ -7,6 +7,7 @@ module.exports = {
 
     for (let i = 1; i<=5; i++){
       studentData.push({
+        user_id: i,
         student_name: `student ${i}`,
         student_gender: 'male',
         place_birth: "Jakarta",

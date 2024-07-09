@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const ApiError = require("../utils/apiError");
 const { User, Auth} = require("../models");
 
-
 const register = async (req, res, next) => {
   try {
     const { full_name, age, user_role, email, password, confirm_password } = req.body;

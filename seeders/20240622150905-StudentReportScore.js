@@ -6,6 +6,8 @@ module.exports = {
     const studentReportScore = [];
     for (let i = 1; i <=5; i++){
       studentReportScore.push({
+
+        studentData_id:i,
         mathematics1:20,
         mathematics2:80,
         mathematics3:83,

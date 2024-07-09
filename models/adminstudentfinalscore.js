@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      AdminStudentFinalScore.hasOne(models.studentData,{
-        foreignKey:{
-          name: "adminStudentFinalScore_id"
-        }
-      });
     }
   }
   AdminStudentFinalScore.init({

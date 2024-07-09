@@ -12,6 +12,10 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
+      studentData_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       mathematics1: {
         type: Sequelize.INTEGER,
         allowNull: false,

@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const { studentReportScores } = require("../models");
 const ApiError = require("../utils/apiError");
 
@@ -41,6 +40,7 @@ const getReportScoreById = async (req, res, next) => {
   }
 }
 const createReportScore = async (req, res, next) => {
+  const studentData_id = 2
   const {
     mathematics1,
     mathematics2,
@@ -64,7 +64,9 @@ const createReportScore = async (req, res, next) => {
     english5,
   } = req.body;
   try {
+  
     const data = {
+      studentData_id,
       mathematics1,
       mathematics2,
       mathematics3,
