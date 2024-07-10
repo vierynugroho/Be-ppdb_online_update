@@ -102,6 +102,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      final_report_score:{
+        type: DataTypes.DECIMAL,
+        allowNull:true
+      },
     },
     {
       sequelize,

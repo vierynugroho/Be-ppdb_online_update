@@ -18,10 +18,11 @@ const getAllFinalScores = async (req, res, next) => {
 
 const createFinalScore = async (req, res, next) => {
     const {health_score, interview_score} = req.body;
+    const average_score = (health_score + interview_score)/2;
+    console.log(average_score);
 
     try {
-        const data = {health_score, interview_score};
-
+        const data = {health_score, interview_score, average_final_score: average_score};
         const newFinalScore = await AdminStudentFinalScore.create(data);
         res.status(200).json({
             status: "Success",

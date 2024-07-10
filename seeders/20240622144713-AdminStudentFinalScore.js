@@ -8,6 +8,7 @@ module.exports = {
       finalScoreData.push ({
         health_score: 80,
         interview_score:80,
+        average_final_score:(80+80)/2,
         createdAt: new Date(),
 				updatedAt: new Date(),
       })

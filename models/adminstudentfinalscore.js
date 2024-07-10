@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull:false
   },
+  average_final_score: {
+        type: DataTypes.INTEGER,
+        allowNull:true
+      },
   }, {
     sequelize,
     modelName: 'AdminStudentFinalScore',

@@ -96,6 +96,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull:false,
       },
+      final_report_score:{
+        type: Sequelize.DECIMAL,
+        allowNull:true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

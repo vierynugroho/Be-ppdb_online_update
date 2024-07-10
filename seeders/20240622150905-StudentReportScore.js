@@ -32,6 +32,8 @@ module.exports = {
         english4:90,
         english5:78,
 
+        final_report_score:90,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       })

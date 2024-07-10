@@ -20,6 +20,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      average_final_score: {
+        type: Sequelize.INTEGER,
+        allowNull:true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

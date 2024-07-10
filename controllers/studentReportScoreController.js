@@ -19,28 +19,112 @@ const getReportScoreById = async (req, res, next) => {
   try {
     id = req.params.id;
     const findData = await studentReportScores.findOne({
-      where:{
+      where: {
         id,
       },
-    })
-    if (!findData){
-      return next (new ApiError (`Score with id ${id} not found`, 404))
+    });
+    if (!findData) {
+      return next(new ApiError(`Score with id ${id} not found`, 404));
     }
     res.status(200).json({
       status: "Success",
-      message: "Student report score successfully retrieved" ,
+      message: "Student report score successfully retrieved",
       requestAt: req.requestTime,
-      data:{
+      data: {
         findData,
-      }
-    })
+      },
+    });
   } catch (err) {
-    return next (new ApiError(err.message, 400));
-
+    return next(new ApiError(err.message, 400));
   }
-}
+};
+// const createReportScore = async (req, res, next) => {
+//   const studentData_id = 2;
+//   const {
+//     mathematics1,
+//     mathematics2,
+//     mathematics3,
+//     mathematics4,
+//     mathematics5,
+//     science1,
+//     science2,
+//     science3,
+//     science4,
+//     science5,
+//     indonesian1,
+//     indonesian2,
+//     indonesian3,
+//     indonesian4,
+//     indonesian5,
+//     english1,
+//     english2,
+//     english3,
+//     english4,
+//     english5,
+//     final_report_score,
+//   } = req.body;
+
+//   const average_final_report_score =
+//     (mathematics1 +
+//       mathematics2 +
+//       mathematics3 +
+//       mathematics4 +
+//       mathematics5 +
+//       science1 +
+//       science2 +
+//       science3 +
+//       science4 +
+//       science5 +
+//       indonesian1 +
+//       indonesian2 +
+//       indonesian3 +
+//       indonesian4 +
+//       indonesian5 +
+//       english1 +
+//       english2 +
+//       english3 +
+//       english4 +
+//       english5) / 20;
+//   try {
+//     const data = {
+//       studentData_id,
+//       mathematics1,
+//       mathematics2,
+//       mathematics3,
+//       mathematics4,
+//       mathematics5,
+//       science1,
+//       science2,
+//       science3,
+//       science4,
+//       science5,
+//       indonesian1,
+//       indonesian2,
+//       indonesian3,
+//       indonesian4,
+//       indonesian5,
+//       english1,
+//       english2,
+//       english3,
+//       english4,
+//       english5,
+//       average_final_report_score
+//     };
+//     console.log(data);
+//     const newReportScore = await studentReportScores.create(data);
+//     res.status(201).json({
+//       status: "Success",
+//       message: "Student score reported successfully created",
+//       requestAt: req.requestTime,
+//       data: { newReportScore},
+//     });
+//   } catch (err) {
+//     return next(new ApiError(err.message, 400));
+//   }
+// };
+
 const createReportScore = async (req, res, next) => {
-  const studentData_id = 2
+  const studentData_id = 2;
   const {
     mathematics1,
     mathematics2,
@@ -61,10 +145,35 @@ const createReportScore = async (req, res, next) => {
     english2,
     english3,
     english4,
-    english5,
+    english5
   } = req.body;
+
+  // Validate that all required scores are provided
+  if (
+    mathematics1 == null || mathematics2 == null || mathematics3 == null ||
+    mathematics4 == null || mathematics5 == null || science1 == null ||
+    science2 == null || science3 == null || science4 == null ||
+    science5 == null || indonesian1 == null || indonesian2 == null ||
+    indonesian3 == null || indonesian4 == null || indonesian5 == null ||
+    english1 == null || english2 == null || english3 == null ||
+    english4 == null || english5 == null
+  ) {
+    return next(new ApiError("All scores are required", 400));
+  }
+
+  // Calculate the average final report score
+  const scores = [
+    mathematics1, mathematics2, mathematics3, mathematics4, mathematics5,
+    science1, science2, science3, science4, science5,
+    indonesian1, indonesian2, indonesian3, indonesian4, indonesian5,
+    english1, english2, english3, english4, english5
+  ];
+
+  const totalScore = scores.reduce((acc, score) => acc + score, 0);
+  const average_final_report_score = totalScore / scores.length;
+  console.log(average_final_report_score);
+
   try {
-  
     const data = {
       studentData_id,
       mathematics1,
@@ -87,11 +196,14 @@ const createReportScore = async (req, res, next) => {
       english3,
       english4,
       english5,
+      final_report_score: average_final_report_score
     };
+
     const newReportScore = await studentReportScores.create(data);
+
     res.status(201).json({
       status: "Success",
-      message: "Student score reported successfully created",
+      message: "Student score report successfully created",
       requestAt: req.requestTime,
       data: { newReportScore },
     });
@@ -99,6 +211,7 @@ const createReportScore = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
+
 const updateReportScore = async (req, res, next) => {
   const {
     mathematics1,
@@ -180,12 +293,14 @@ const deleteReportScore = async (req, res, next) => {
   try {
     const id = req.params.id;
     const findData = await studentReportScores.findOne({
-      where:{
+      where: {
         id,
-      }
+      },
     });
-    if (!findData){
-      return next (new ApiError(`Student score report with id ${id} not found`, 404));
+    if (!findData) {
+      return next(
+        new ApiError(`Student score report with id ${id} not found`, 404)
+      );
     }
     await findData.destroy({
       where: {
@@ -196,19 +311,16 @@ const deleteReportScore = async (req, res, next) => {
       status: "Success",
       message: "Student score report successfully deleted",
       requestAt: req.requestTime,
-
-    })
-
+    });
   } catch (err) {
-    return next (new ApiError(err.message, 400))
-
+    return next(new ApiError(err.message, 400));
   }
-}
+};
 
 module.exports = {
   createReportScore,
   updateReportScore,
   getAllReportScores,
   getReportScoreById,
-  deleteReportScore
+  deleteReportScore,
 };
