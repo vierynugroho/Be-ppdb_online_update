@@ -18,14 +18,14 @@ const getAllFinalScores = async (req, res, next) => {
 const createFinalScore = async (req, res, next) => {
   try {
     const { user_id, health_score, interview_score } = req.body;
-    const finalScoreReport = await studentReportScores.findOne({
+    const total_report = await studentReportScores.findOne({
       where: {
         user_id,
       },
     });
-    console.log(finalScoreReport);
+    console.log(total_report);
     const average_score =
-      (health_score + interview_score + finalScoreReport.final_report_score) / 2;
+      (health_score + interview_score + total_report.total_report_score) / 2;
     console.log(average_score);
     const data = {
         user_id,

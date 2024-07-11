@@ -96,7 +96,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull:false,
       },
-      final_report_score:{
+      total_report_score:{
         type: Sequelize.FLOAT,
         allowNull:true
       },

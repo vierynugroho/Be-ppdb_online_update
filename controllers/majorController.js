@@ -4,14 +4,12 @@ const ApiError = require ("../utils/apiError")
 const getAllMajors = async (req, res, next) => {
     try {
         const allMajors = await Majors.findAll();
-
         res.status(200).json({
             status: "Success",
             message: "All Majors successfully retrieved",
             requestAt: req.requestTime,
-            data: {allMajors},
+            data: allMajors,
         });
-
     }catch (err) {
         return next (new ApiError(err.message, 400))
     }
@@ -31,12 +29,11 @@ const getMajorById = async (req, res, next) => {
             status: "Success",
             message: `Major with id '${id}' successfully retrieved`,
             requestAt:req. requestTime,
-            data: {findMajor}
+            data: findMajor
         });
     }catch(err){
         return next (new ApiError(err.message, 400))
     }
-
 };
 const createMajor = async (req, res, next) => {
     const {major_name, major_description} = req.body;
@@ -47,16 +44,14 @@ const createMajor = async (req, res, next) => {
         }
         console.log(data);
         const newMajor = await Majors.create(data);
-
         res.status(201).json({
             status: "Success",
             message: "Major successfully created",
-            data: { newMajor },
+            data: newMajor
         })
     }catch (err) {
         return next (new ApiError(err.message, 400))
     }
-
 };
 const updateMajor = async (req, res, next) => {
     const{major_name, major_description} = req.body;
@@ -84,12 +79,11 @@ const updateMajor = async (req, res, next) => {
                 id,
             }
         });
-
         res.status(200).json({
             status: "Success",
             message: "Major Successfully",
             requestAt: req.requestTime,
-            data:{updateMajor}
+            data: updateMajor
         })
     }catch (err) {
         return next (new ApiError (err.message,400))
@@ -98,17 +92,14 @@ const updateMajor = async (req, res, next) => {
 const deleteMajor = async  (req, res, next) => {
     try{
         const Major = await major.findByPk(req.params.id);
-
         if (!Major){
             return next (new ApiError (`Major with id '${id}' not found`))
         }
-
         await Majors.destroy({
             where:{
                 id: req.params.id,
             },
         })
-
         res.status(200).json({
             status: "Success",
             message: "Major successfully deleted",

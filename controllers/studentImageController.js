@@ -51,9 +51,7 @@ const createImage = async (req, res, next) => {
       status: "Success",
       message: "Student image successfully created",
       requestAt: req.requesTime,
-      data: {
-        newStudentImage,
-      },
+      data: newStudentImage
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));

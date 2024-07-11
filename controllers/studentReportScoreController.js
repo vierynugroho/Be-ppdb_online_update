@@ -35,91 +35,6 @@ const getReportScoreById = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
-// const createReportScore = async (req, res, next) => {
-//   const studentData_id = 2;
-//   const {
-//     mathematics1,
-//     mathematics2,
-//     mathematics3,
-//     mathematics4,
-//     mathematics5,
-//     science1,
-//     science2,
-//     science3,
-//     science4,
-//     science5,
-//     indonesian1,
-//     indonesian2,
-//     indonesian3,
-//     indonesian4,
-//     indonesian5,
-//     english1,
-//     english2,
-//     english3,
-//     english4,
-//     english5,
-//     final_report_score,
-//   } = req.body;
-
-//   const average_final_report_score =
-//     (mathematics1 +
-//       mathematics2 +
-//       mathematics3 +
-//       mathematics4 +
-//       mathematics5 +
-//       science1 +
-//       science2 +
-//       science3 +
-//       science4 +
-//       science5 +
-//       indonesian1 +
-//       indonesian2 +
-//       indonesian3 +
-//       indonesian4 +
-//       indonesian5 +
-//       english1 +
-//       english2 +
-//       english3 +
-//       english4 +
-//       english5) / 20;
-//   try {
-//     const data = {
-//       studentData_id,
-//       mathematics1,
-//       mathematics2,
-//       mathematics3,
-//       mathematics4,
-//       mathematics5,
-//       science1,
-//       science2,
-//       science3,
-//       science4,
-//       science5,
-//       indonesian1,
-//       indonesian2,
-//       indonesian3,
-//       indonesian4,
-//       indonesian5,
-//       english1,
-//       english2,
-//       english3,
-//       english4,
-//       english5,
-//       average_final_report_score
-//     };
-//     console.log(data);
-//     const newReportScore = await studentReportScores.create(data);
-//     res.status(201).json({
-//       status: "Success",
-//       message: "Student score reported successfully created",
-//       requestAt: req.requestTime,
-//       data: { newReportScore},
-//     });
-//   } catch (err) {
-//     return next(new ApiError(err.message, 400));
-//   }
-// };
-
 const createReportScore = async (req, res, next) => {
   const studentData_id = 2;
   const {
@@ -168,8 +83,8 @@ const createReportScore = async (req, res, next) => {
 
   const totalScore = scores.reduce((acc, score) => acc + score, 0);
     console.log(totalScore);
-  const average_final_report_score = (totalScore/scores.length);
-  console.log(average_final_report_score);
+  const average_report_score = (totalScore/scores.length);
+  console.log(average_report_score);
   try {
     const data = {
       studentData_id,
@@ -193,7 +108,7 @@ const createReportScore = async (req, res, next) => {
       english3,
       english4,
       english5,
-      final_report_score: average_final_report_score
+      total_report_score: average_report_score
     };
 
     const newReportScore = await studentReportScores.create(data);
@@ -202,7 +117,7 @@ const createReportScore = async (req, res, next) => {
       status: "Success",
       message: "Student score report successfully created",
       requestAt: req.requestTime,
-      data: { newReportScore },
+      data: newReportScore
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -280,7 +195,7 @@ const updateReportScore = async (req, res, next) => {
       status: "Success",
       message: "Student score report successfully updated",
       requestAt: req.requestTime,
-      data: { updateData },
+      data: updateData
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));

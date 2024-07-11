@@ -9,7 +9,7 @@ const getStudentData = async (req, res, next) => {
       status: "Success",
       message: "Student data successfully retrieved",
       requestAt: req.requestTime,
-      data: { allStudentData },
+      data: allStudentData
     });
   } catch (err) {
     return next(new Error(err.message, 400));
@@ -31,9 +31,7 @@ const getStudentDataById = async (req, res, next) => {
       status: "Success",
       message: "Student data successfully retrieved",
       requestAt: req.requestTime,
-      data: {
-        findData,
-      },
+      data: findData
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -112,9 +110,7 @@ const createStudentData = async (req, res, next) => {
       status: "Success",
       message: " Student Data Successfully created",
       requestAt: req.requestTime,
-      data: {
-        newStudentData,
-      },
+      data:newStudentData
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -215,7 +211,7 @@ const updateStudentData = async (req, res, next) => {
       status: "Success",
       message: "Student Data successfully updated",
       requestAt: req.requestTime,
-      data: { updateData },
+      data: updateData
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));

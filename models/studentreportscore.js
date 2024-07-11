@@ -102,7 +102,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      final_report_score:{
+      total_report_score:{
         type: DataTypes.FLOAT,
         allowNull:true
       },
