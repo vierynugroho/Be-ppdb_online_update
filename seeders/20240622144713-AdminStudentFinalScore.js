@@ -6,6 +6,7 @@ module.exports = {
     const finalScoreData = [];
     for (let i = 1; i <= 5; i++) {
       finalScoreData.push ({
+        user_id: i,
         health_score: 80,
         interview_score:80,
         average_final_score:(80+80)/2,

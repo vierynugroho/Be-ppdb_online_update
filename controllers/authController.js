@@ -48,7 +48,6 @@ const register = async (req, res, next) => {
     return next (new ApiError(err.message, 500));
   }
 };
-
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
@@ -64,7 +63,6 @@ const login = async (req, res, next) => {
       include: ['User'],
     });
     console.log(findUser);
-
     if (findUser && bcrypt.compareSync(password, findUser.password)){
       const token = jwt.sign({
         user_id:findUser.user_id,

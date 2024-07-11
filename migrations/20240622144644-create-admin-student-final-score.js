@@ -13,15 +13,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       health_score: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       interview_score: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       average_final_score: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:true
       },
       createdAt: {

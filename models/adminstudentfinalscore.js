@@ -10,21 +10,27 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-
+      AdminStudentFinalScore.belongsTo(models.User,{
+        foreignKey: {
+          name: 'user_id',
+        },
+      });
     }
   }
   AdminStudentFinalScore.init({
+    user_id: {
+      type:DataTypes.INTEGER
+    },
     health_score: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull:false,
     },
     interview_score:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull:false
   },
   average_final_score: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull:true
       },
   }, {

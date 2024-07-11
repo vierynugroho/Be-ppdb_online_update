@@ -4,12 +4,11 @@ const ApiError = require("../utils/apiError");
 const getAllReportScores = async (req, res, next) => {
   try {
     const allReportScores = await studentReportScores.findAll();
-
     res.status(200).json({
       status: "Success",
       message: "Student report score successfully retrieved",
       requestAt: req.requestTime,
-      data: { allReportScores },
+      data: allReportScores ,
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -30,9 +29,7 @@ const getReportScoreById = async (req, res, next) => {
       status: "Success",
       message: "Student report score successfully retrieved",
       requestAt: req.requestTime,
-      data: {
-        findData,
-      },
+      data: findData
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -170,9 +167,9 @@ const createReportScore = async (req, res, next) => {
   ];
 
   const totalScore = scores.reduce((acc, score) => acc + score, 0);
-  const average_final_report_score = totalScore / scores.length;
+    console.log(totalScore);
+  const average_final_report_score = (totalScore/scores.length);
   console.log(average_final_report_score);
-
   try {
     const data = {
       studentData_id,

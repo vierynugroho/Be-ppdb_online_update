@@ -17,87 +17,87 @@ module.exports = {
         allowNull: false,
       },
       mathematics1: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       mathematics2: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       mathematics3: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       mathematics4: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       mathematics5: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       science1: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       science2: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       science3: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       science4: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       science5: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false
       },
       indonesian1: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       indonesian2: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       indonesian3: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       indonesian4: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false
       },
       indonesian5: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       english1: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       english2: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       english3: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       english4: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       english5: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:false,
       },
       final_report_score:{
-        type: Sequelize.DECIMAL,
+        type: Sequelize.FLOAT,
         allowNull:true
       },
       createdAt: {
