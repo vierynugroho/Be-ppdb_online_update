@@ -14,7 +14,6 @@ const getAllFinalScores = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
-
 const createFinalScore = async (req, res, next) => {
   try {
     const { user_id, health_score, interview_score } = req.body;
@@ -24,11 +23,9 @@ const createFinalScore = async (req, res, next) => {
       },
     });
     console.log(total_report);
-    const average_score =
-      (health_score + interview_score + total_report.total_report_score) / 2;
-    console.log(average_score);
+    const average_score = (health_score + interview_score + total_report.total_report_score) / 2;
     const data = {
-        user_id,
+      user_id,
       health_score,
       interview_score,
       average_final_score: average_score,
@@ -38,7 +35,7 @@ const createFinalScore = async (req, res, next) => {
       status: "Success",
       message: "Final Score created successfully",
       requestAt: req.requestTime,
-      data: finalScore
+      data: finalScore,
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -54,6 +51,8 @@ const updateFinalScore = async (req, res, next) => {
         id,
       },
     });
+    console.log(findData)
+    return
 
     if (!findData) {
       return next(new ApiError(`Data with id ${id} not found`, 404));
@@ -78,7 +77,7 @@ const updateFinalScore = async (req, res, next) => {
       status: "Success",
       message: "Final Score successfully updated",
       requestAt: req.requestTime,
-      data: updateData
+      data: updateData,
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
