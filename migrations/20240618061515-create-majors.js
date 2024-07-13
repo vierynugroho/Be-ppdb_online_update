@@ -18,8 +18,8 @@ module.exports = {
         allowNull: false,
       },
       major_picture: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        type: Sequelize.TEXT,
+        allowNull: false,
         defaultValue: "default.png"
       },
       createdAt: {

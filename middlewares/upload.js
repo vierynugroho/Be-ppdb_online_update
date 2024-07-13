@@ -27,6 +27,7 @@ const upload = multerConfig.fields([
     { name: "graduation_certificate", maxCount: 1 },
     { name: "graduation_certificate_highSchool", maxCount: 1 },
     { name: "report_scores", maxCount: 1 },
+    { name: "major_picture", maxCount: 1 },
 ]);
 
 module.exports = upload;

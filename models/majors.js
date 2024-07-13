@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
     },
     major_picture: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false,
       defaultValue: "default.png",
     },
   }, {
