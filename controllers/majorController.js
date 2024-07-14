@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const { Majors } = require("../models");
 const ApiError = require("../utils/apiError");
 const handleUploadImage = require("../utils/handleUpload");
@@ -63,7 +62,6 @@ const createMajor = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
-
 const updateMajor = async (req, res, next) => {
   try {
     const { major_name, major_description } = req.body;
@@ -110,7 +108,6 @@ const updateMajor = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
-
 const deleteMajor = async (req, res, next) => {
   try {
     const Major = await Majors.findByPk(req.params.id);

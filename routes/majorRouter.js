@@ -1,13 +1,17 @@
 const router = require("express").Router();
 const Major = require("../controllers/majorController")
 const upload = require("../middlewares/upload");
-const {createMajor, updateMajor} = require("../controllers/majorController")
+const CheckRole = require ("../middlewares/role");
+const Authenticate = require("../middlewares/authentication");
+const Validator = require("../middlewares/validator");
+const {createMajor, updateMajor, getAllMajors, getMajorById, deleteMajor} = require("../controllers/majorController");
+const { majorSchema, updateMajorSchema } = require("../utils/joiValidation");
 
 
-router.get("/", Major.getAllMajors );
-router.get("/:id", Major.getMajorById);
-router.post("/", upload, createMajor);
-router.patch("/:id", upload, updateMajor);
-router.delete("/:id", Major.deleteMajor);
+router.get("/", Authenticate, CheckRole("admin"), getAllMajors);
+router.get("/:id", Authenticate, CheckRole("admin"), getMajorById);
+router.post("/create", Authenticate, CheckRole("admin"), upload, Validator(majorSchema), createMajor);
+router.patch("/update/:id", Authenticate, CheckRole("admin"), upload, Validator(updateMajorSchema), updateMajor);
+router.delete("/delete/:id", Authenticate, CheckRole("admin"), deleteMajor);
 
 module.exports = router;

@@ -16,7 +16,7 @@ const register = async (req, res, next) => {
       user_role,
     });
 
-    await Auth.create({
+    const auth = await Auth.create({
         user_id:newUser.id,
         email,
         password:hashedPassword,
@@ -36,11 +36,10 @@ const register = async (req, res, next) => {
                 updatedAt: newUser.updatedAt,
             },
             auth:{
-              email: newUser.email,
+              email: auth.email,
               password: hashedPassword,
-              confirm_password: hashedConfirmPassword,
-              createdAt: newUser.createdAt,
-              updatedAt: newUser.updatedAt,
+              createdAt: auth.createdAt,
+              updatedAt: auth.updatedAt,
             }
         },
     })
@@ -71,6 +70,9 @@ const login = async (req, res, next) => {
         email: findUser.email,
       },
       process.env.JWT_SECRET,
+      {
+					expiresIn: process.env.JWT_EXPIRED,
+				}
     );
 
     res.cookie('_token', token, {
