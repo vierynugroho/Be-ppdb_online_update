@@ -12,6 +12,7 @@ const handleUploadImage = async (files) => {
 			const uploadedImage = await imageKit.upload({
 				file: file.buffer,
 				fileName: `user-${Date.now()}.${extension}`,
+				folder: "Database",
 			});
 
 			imagesUrl.push(uploadedImage.url);

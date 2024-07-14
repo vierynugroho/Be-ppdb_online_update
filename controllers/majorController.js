@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const { Majors } = require("../models");
 const ApiError = require("../utils/apiError");
 const handleUploadImage = require("../utils/handleUpload");
@@ -37,25 +38,20 @@ const getMajorById = async (req, res, next) => {
   }
 };
 const createMajor = async (req, res, next) => {
-
   try {
     const { major_name, major_description } = req.body;
     const files = req.files;
     const image = files.major_picture;
-    console.log(image)
 
     if (!image) {
-        return next (new ApiError("No file uploaded", 422));
+      return next(new ApiError("No file uploaded", 422));
     }
-
-    const majorPicture = await handleUploadImage(image)
-
+    const majorPicture = await handleUploadImage(image);
     const data = {
       major_name,
       major_description,
-      major_picture:majorPicture.imagesUrl,
+      major_picture: majorPicture.imagesUrl,
     };
-    console.log(data);
 
     const newMajor = await Majors.create(data);
     res.status(201).json({
@@ -69,21 +65,31 @@ const createMajor = async (req, res, next) => {
 };
 
 const updateMajor = async (req, res, next) => {
-  const { major_name, major_description } = req.body;
   try {
+    const { major_name, major_description } = req.body;
     const id = req.params.id;
+    const files = req.files;
+    const image = files.major_picture;
+
+    if (!image) {
+      return next(new ApiError("No file uploaded", 422));
+    }
+
     const findMajor = await Majors.findOne({
       where: {
         id,
       },
     });
     if (!findMajor) {
-      return next(new ApiError(`Major with id '${id}' not found`, 404));
+      return next(new ApiError(`Major with id '${id}' is not found`, 404));
     }
+    const majorPicture = await handleUploadImage(image); // upload image
+
     await Majors.update(
       {
         major_name,
         major_description,
+        major_picture: majorPicture.imagesUrl,
       },
       {
         where: {
@@ -91,21 +97,20 @@ const updateMajor = async (req, res, next) => {
         },
       }
     );
-    const updateMajor = await Majors.findOne({
-      where: {
-        id,
-      },
-    });
     res.status(200).json({
       status: "Success",
-      message: "Major Successfully",
-      requestAt: req.requestTime,
-      data: updateMajor,
+      message: "Major successfully updated",
+      data: {
+        major_name: major_name,
+        major_description: major_description,
+        major_picture: majorPicture.imagesUrl,
+      },
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
   }
 };
+
 const deleteMajor = async (req, res, next) => {
   try {
     const Major = await Majors.findByPk(req.params.id);
