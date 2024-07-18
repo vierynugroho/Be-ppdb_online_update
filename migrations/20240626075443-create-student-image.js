@@ -9,33 +9,29 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			studentData_id: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-			},
 			student_picture: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			ijazah_picture: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			family_card: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			graduation_certificate: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			graduation_certificate_highSchool: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			report_scores: {
 				type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
-				allowNull: false,
+				allowNull: true,
 			},
 			createdAt: {
 				allowNull: false,

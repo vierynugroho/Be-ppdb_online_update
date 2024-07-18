@@ -50,9 +50,9 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
-    console.log(email, password);
+    console.log(req.body)
 
-    if ((!email && !password)){
+    if ((!email || !password)){
       return next (new ApiError("Please enter email or password", 400))
     }
     const findUser = await Auth.findOne({
@@ -61,8 +61,11 @@ const login = async (req, res, next) => {
       },
       include: ['User'],
     });
-    console.log(findUser);
-    if (findUser && bcrypt.compareSync(password, findUser.password)){
+    console.log(findUser)
+    if (!findUser){
+      return next (new ApiError ("User not found", 400))
+    }
+    bcrypt.compareSync(password, findUser.password)
       const token = jwt.sign({
         user_id:findUser.user_id,
         full_name:findUser.User.full_name,
@@ -85,9 +88,6 @@ const login = async (req, res, next) => {
       message:"Login successfully",
       _token: token,
     });
-    }else{
-      return next (new ApiError("wrong Password or user not found", 400));
-    }
   } catch (err) {
     return next (new ApiError(err.message, 500));
   }

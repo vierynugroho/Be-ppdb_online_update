@@ -38,7 +38,6 @@ const createImage = async (req, res, next) => {
 
     // Menyimpan informasi gambar yang diunggah ke basis data
     const newStudentImage = await StudentImage.create({
-      studentData_id: 1, //! nanti ambil dari studentData sesuai dengan id Student yang login
       student_picture: studentPicture.imagesUrl,
       ijazah_picture: ijazahPicture.imagesUrl,
       family_card: familyCard.imagesUrl,

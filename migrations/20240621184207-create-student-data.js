@@ -19,7 +19,7 @@ module.exports = {
       },
       student_gender: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       place_birth: {
         type: Sequelize.STRING,

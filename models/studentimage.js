@@ -9,16 +9,10 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			StudentImage.belongsTo(models.studentData, {
-				foreignKey: {
-					name: 'studentData_id',
-				},
-			});
 		}
 	}
 	StudentImage.init(
 		{
-			studentData_id: DataTypes.INTEGER,
 			student_picture: DataTypes.ARRAY(DataTypes.TEXT),
 			ijazah_picture: DataTypes.ARRAY(DataTypes.TEXT),
 			family_card: DataTypes.ARRAY(DataTypes.TEXT),
