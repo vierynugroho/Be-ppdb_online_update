@@ -143,7 +143,6 @@ module.exports = (sequelize, DataTypes) => {
       upload_pdf: {
         type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
         allowNull: true,
-
       }
   }, {
     sequelize,
