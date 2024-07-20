@@ -16,7 +16,7 @@ const  upload  = require("../middlewares/upload");
 
 router.get("/", getStudentData);
 router.get("/:id", getStudentDataById)
-router.post("/create", createStudentData);
+// router.post("/uploadDocument", upload, createStudentData);
 router.patch("/update/:id", updateStudentData);
 router.delete("/delete/:id", deleteStudentData)
 

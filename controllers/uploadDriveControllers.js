@@ -2,6 +2,7 @@ const { google } = require("googleapis");
 const apiKey = require("../security/apiKey");
 const ApiError = require("../utils/apiError");
 const Readable = require("stream");
+
 const SCOPE = ["https://www.googleapis.com/auth/drive"];
 
 const authorize = async () => {
@@ -13,6 +14,7 @@ const authorize = async () => {
   );
   return jwtClient;
 };
+
 const uploadDocument = (req, res, next) => {
   try {
     const files = req.files;
@@ -24,11 +26,12 @@ const uploadDocument = (req, res, next) => {
           return file.buffer;
         })
       );
-      return new Promise((resolve, reject) => {
+      return new Promise ((resolve, reject) => {
         const drive = google.drive({
           version: "v3",
           auth: authClient,
         });
+
         drive.files.create(
           {
             resource: {
@@ -50,15 +53,16 @@ const uploadDocument = (req, res, next) => {
         );
       });
     };
-    authorize()
-      .then(upload)
-      .catch((err) => console.log(err));
+
+    authorize().then(upload).catch((err) => console.log(err));
+
     res.status(200).json({
-      status: "true",
-      message: "your document uploaded successfully",
-    });
+        status: "true",
+        message: "your document uploaded successfully"
+    })
   } catch (err) {
-    return next(new ApiError(err.message, 500));
+    return next (new ApiError(err.message, 500))
   }
 };
+
 module.exports = uploadDocument;
