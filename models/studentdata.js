@@ -139,6 +139,11 @@ module.exports = (sequelize, DataTypes) => {
       nisn: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      upload_pdf: {
+        type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
+        allowNull: true,
+
       }
   }, {
     sequelize,

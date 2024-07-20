@@ -1,6 +1,6 @@
 const multer = require("multer");
 
-const allowedTypes = ["image/jpg", "image/jpeg", "image/png"];
+const allowedTypes = ["image/jpg", "image/jpeg", "image/png", "file/pdf"];
 
 const storage = multer.memoryStorage();
 
