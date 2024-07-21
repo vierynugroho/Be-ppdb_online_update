@@ -15,7 +15,7 @@ const authorize = async () => {
   return jwtClient;
 };
 
-const getStudentData = async (req, res, next) => {
+const findAllStudentData = async (req, res, next) => {
   try {
     const allStudentData = await studentData.findAll();
     const allReportScore = await studentReportScores.findAll();
@@ -33,7 +33,7 @@ const getStudentData = async (req, res, next) => {
     return next(new Error(err.message, 400));
   }
 };
-const getStudentDataById = async (req, res, next) => {
+const findStudentDataById = async (req, res, next) => {
   try {
     const id = req.params.id;
     const findData = await studentData.findOne({
@@ -67,7 +67,6 @@ const getStudentDataById = async (req, res, next) => {
 const createStudentData = async (req, res, next) => {
   const files = req.files;
   const user_id = req.user.id;
-  console.log(user_id);
   const {
     student_name,
     student_gender,
@@ -99,7 +98,6 @@ const createStudentData = async (req, res, next) => {
     school_address,
     ijazah_number,
     nisn,
-    upload_pdf,
     mathematics1,
     mathematics2,
     mathematics3,
@@ -168,14 +166,10 @@ const createStudentData = async (req, res, next) => {
     english4,
     english5,
   ];
-
   const totalScore = scores.reduce((acc, score) => acc + score, 0);
-  console.log(totalScore);
   const average_report_score = totalScore / scores.length;
-  console.log(average_report_score);
   try {
     const studentDocument = files["studentDocument"];
-    console.log(studentDocument);
     const report_score = await studentReportScores.create({
       user_id,
       mathematics1,
@@ -200,15 +194,16 @@ const createStudentData = async (req, res, next) => {
       english5,
       total_report_score: average_report_score,
     });
-    console.log(report_score);
-
     let documentId = "";
+	 console.log(documentId)
     const upload = async (authClient) => {
       const fileBuffer = await Promise.all(
         studentDocument.map(async (file) => {
           return file.buffer;
         })
       );
+	 
+	  console.log(studentDocument)
 
       const drive = google.drive({
         version: "v3",
@@ -240,7 +235,6 @@ const createStudentData = async (req, res, next) => {
         );
       });
       documentId = file;
-      return documentId;
     };
 
     await authorize()
@@ -281,7 +275,6 @@ const createStudentData = async (req, res, next) => {
       nisn,
       document_id: documentId,
     });
-
     res.status(200).json({
       status: "Success",
       message: " Student Data Successfully created",
@@ -582,9 +575,9 @@ const deleteStudentData = async (req, res, next) => {
   }
 };
 module.exports = {
-  getStudentData,
+  findAllStudentData,
+  findStudentDataById,
   createStudentData,
   updateStudentData,
-  getStudentDataById,
   deleteStudentData,
 };

@@ -135,8 +135,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      upload_pdf:{
-        type: Sequelize.Sequelize.ARRAY(Sequelize.TEXT),
+      document_id:{
+        type: Sequelize.STRING,
 				allowNull: true,
 			},
       createdAt: {
