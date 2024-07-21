@@ -8,7 +8,7 @@ const loginSchema = Joi.object({
 
 //only admin
 const onlyAdminAndStudent = Joi.object({
-  name: Joi.string().max(50).required(),
+  full_name: Joi.string().max(50).required(),
   user_role: Joi.string().required().valid("admin", "student"),
   email: Joi.string().email().required(),
   password: Joi.string().min(8).alphanum().required(),
@@ -18,7 +18,7 @@ const onlyAdminAndStudent = Joi.object({
 });
 
 const onlyAdminUpdate = Joi.object({
-  name: Joi.string().max(60),
+  full_name: Joi.string().max(60),
   user_role: Joi.string().valid("admin", "student"),
   email: Joi.string().email(),
   //   user_id: Joi.string()
@@ -43,11 +43,13 @@ const onlyStudent = Joi.object({
 const majorSchema = Joi.object({
   major_name: Joi.string().max(30).required(),
   major_description: Joi.string().max(300).required(),
+  major_picture: Joi.any(),
 });
 
 const updateMajorSchema = Joi.object({
   major_name: Joi.string().max(30),
   major_description: Joi.string().max(300),
+   major_picture: Joi.any(),
 });
 
 module.exports = {

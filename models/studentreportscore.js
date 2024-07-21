@@ -8,20 +8,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      studentReportScores.belongsTo(models.studentData,{
-        foreignKey: {
-          name:"studentData_id",
-        }
-      });
     }
   }
   studentReportScores.init(
     {
       user_id: DataTypes.INTEGER,
-      studentData_id:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       mathematics1: {
         type: DataTypes.FLOAT,
         allowNull: false,

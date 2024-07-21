@@ -19,7 +19,7 @@ module.exports = {
       },
       student_gender: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       place_birth: {
         type: Sequelize.STRING,
@@ -135,6 +135,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      document_id:{
+        type: Sequelize.STRING,
+				allowNull: true,
+			},
       createdAt: {
         type: Sequelize.DATE
       },

@@ -1,10 +1,9 @@
 const router = require("express").Router();
-const Major = require("../controllers/majorController")
+const Authenticate = require("../middlewares/authentication");
+const {createMajor, updateMajor, getAllMajors, getMajorById, deleteMajor} = require("../controllers/majorController");
 const upload = require("../middlewares/upload");
 const CheckRole = require ("../middlewares/role");
-const Authenticate = require("../middlewares/authentication");
 const Validator = require("../middlewares/validator");
-const {createMajor, updateMajor, getAllMajors, getMajorById, deleteMajor} = require("../controllers/majorController");
 const { majorSchema, updateMajorSchema } = require("../utils/joiValidation");
 
 

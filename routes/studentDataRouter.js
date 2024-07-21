@@ -1,10 +1,15 @@
-const router = require("express").Router();
-const studentData = require("../controllers/studentDataController");
+const router = require('express').Router();
+const CheckRole = require('../middlewares/role');
+const Authenticate = require('../middlewares/authentication');
+const Validator = require('../middlewares/validator');
+const { findAllStudentData, findStudentDataById, createStudentData, updateStudentData, deleteStudentData } = require('../controllers/studentDataController');
+const upload = require('../middlewares/upload');
 
-router.get("/", studentData.getStudentData);
-router.get("/:id",studentData.getStudentDataById);
-router.post("/", studentData.createStudentData);
-router.patch("/:id",studentData.updateStudentData);
-router.delete("/:id",studentData.deleteStudentData);
+
+router.get('/', Authenticate, CheckRole("admin"), findAllStudentData);
+router.get('/:id', Authenticate, CheckRole("admin"), findStudentDataById);
+router.post('/create', Authenticate, CheckRole("admin", "student"), upload, createStudentData);
+router.patch('/update/:id', Authenticate, CheckRole("admin", "student"), updateStudentData);
+router.delete('/delete/:id', Authenticate, CheckRole("admin"), deleteStudentData);
 
 module.exports = router;

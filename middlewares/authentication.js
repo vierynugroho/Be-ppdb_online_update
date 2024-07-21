@@ -1,4 +1,4 @@
-const ApiError = require ("../utils/apiError")
+const ApiError = require('../utils/apiError');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
@@ -11,13 +11,15 @@ module.exports = async (req, res, next) => {
 		}
 		const token = bearerToken.split('Bearer ')[1];
 		const payload = jwt.verify(token, process.env.JWT_SECRET);
-		const user = await User.findByPk(payload.id, {
+
+		const user = await User.findByPk(payload.user_id, {
 			include: ['Auth'],
 		});
 
-		req.user = user;
+		const userData = JSON.parse(JSON.stringify(user));
+		req.user = userData;
 		if (req.user === null) {
-			return next(new ApiError("Unauthorized, please re-login", 401));
+			return next(new ApiError('Unauthorized, please re-login', 401));
 		}
 		next();
 	} catch (err) {

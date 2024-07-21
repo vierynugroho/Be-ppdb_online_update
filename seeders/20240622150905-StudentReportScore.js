@@ -7,7 +7,6 @@ module.exports = {
     for (let i = 1; i <=5; i++){
       studentReportScore.push({
         user_id:i,
-        studentData_id:i,
         mathematics1:20,
         mathematics2:80,
         mathematics3:83,
