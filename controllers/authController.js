@@ -36,6 +36,7 @@ const register = async (req, res, next) => {
                 updatedAt: newUser.updatedAt,
             },
             auth:{
+              user_id: newUser.id,
               email: auth.email,
               password: hashedPassword,
               createdAt: auth.createdAt,
@@ -50,7 +51,6 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
-    console.log(req.body)
 
     if ((!email || !password)){
       return next (new ApiError("Please enter email or password", 400))
@@ -61,7 +61,6 @@ const login = async (req, res, next) => {
       },
       include: ['User'],
     });
-    console.log(findUser)
     if (!findUser){
       return next (new ApiError ("User not found", 400))
     }
