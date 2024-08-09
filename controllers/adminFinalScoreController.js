@@ -1,14 +1,18 @@
-const { AdminStudentFinalScore, studentReportScores } = require("../models");
+const { AdminStudentFinalScore, studentReportScores} = require("../models");
+const { Sequelize } = require("sequelize");
 const ApiError = require("../utils/apiError");
 
 const getAllFinalScores = async (req, res, next) => {
   try {
-    const allFinalScores = await AdminStudentFinalScore.findAll();
+
+    const allFinalScores = await AdminStudentFinalScore.findAll({
+      order:[["average_final_score", "DESC"]],
+    });
     res.status(200).json({
       status: "Success",
       message: "All student scores successfully retrieved",
       requestAt: req.requestTime,
-      data: { allFinalScores },
+      data: allFinalScores
     });
   } catch (err) {
     return next(new ApiError(err.message, 400));
@@ -93,7 +97,6 @@ const updateFinalScore = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
-
 module.exports = {
   getAllFinalScores,
   createFinalScore,

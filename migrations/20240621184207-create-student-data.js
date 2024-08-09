@@ -17,8 +17,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      student_gender: {
+      family_card_number:{
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      student_gender: {
+        type: Sequelize.ENUM(["Laki-laki", "Perempuan"]),
         allowNull: true,
       },
       place_birth: {
@@ -33,12 +37,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      student_address_now: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       student_distance:{
         type: Sequelize.STRING,
         allowNull: false,
       },
       student_religion: {
-        type:Sequelize.ENUM(["Islam", "Kristen", "Budha", "Hindu"]),
+        type:Sequelize.STRING,
         defaultValue: "Islam",
         allowNull: false,
       },
@@ -59,7 +67,7 @@ module.exports = {
         allowNull: false,
       },
       student_kps: {
-        type: Sequelize.STRING,
+         type: Sequelize.STRING,
         allowNull: false,
       },
       student_hobby: {
@@ -72,6 +80,10 @@ module.exports = {
       },
       father_job: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      father_income:{
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       place_birth_father: {
@@ -90,16 +102,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      mother_income:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       place_birth_mother: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       mother_birth: {
         type: Sequelize.DATE,
-        allowNull: false,
-      },
-      guardian_name: {
-        type: Sequelize.STRING,
         allowNull: false,
       },
       phoneNumber_house:{
@@ -127,6 +139,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      school_status:{
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       ijazah_number: {
         type:  Sequelize.STRING,
         allowNull: false,
@@ -135,7 +151,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      document_id:{
+      major_choice:{
+        type:Sequelize.STRING,
+        allowNull:true
+      },
+      upload_document:{
         type: Sequelize.STRING,
 				allowNull: true,
 			},

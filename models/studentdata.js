@@ -1,5 +1,5 @@
-'use strict';
-const {Model,Sequelize, STRING} = require('sequelize');
+"use strict";
+const { Model, Sequelize, STRING } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class studentData extends Model {
     /**
@@ -8,29 +8,34 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      studentData.belongsTo(models.User,{
-        foreignKey: "user_id"
+      studentData.belongsTo(models.User, {
+        foreignKey: "user_id",
       });
     }
   }
-  studentData.init({
-    user_id:{
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    student_name: {
+  studentData.init(
+    {
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      student_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      family_card_number: {
+        type:DataTypes.STRING,
+        allowNull: false,
+      },
       student_gender: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(["Laki-laki", "Perempuan"]),
         allowNull: true,
       },
       place_birth: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      date_birth:{
+      date_birth: {
         type: DataTypes.DATE,
         allowNull: false,
       },
@@ -38,12 +43,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      student_distance:{
+       student_address_now:{
+        type: DataTypes.STRING,
+        allowNull: false
+       },
+      student_distance: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       student_religion: {
-        type:DataTypes.ENUM(["Islam", "Kristen", "Budha", "Hindu"]),
+        type: DataTypes.STRING,
         defaultValue: "Islam",
         allowNull: false,
       },
@@ -79,6 +88,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      father_income:{
+        type: DataTypes.INTEGER, 
+        allowNull: false,
+      },
       place_birth_father: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -91,6 +104,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+       mother_income:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+       },
       mother_job: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -103,28 +120,28 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      guardian_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      phoneNumber_house:{
+      phoneNumber_house: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       guardian_name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:true,
       },
       guardian_address: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:true,
       },
       guardian_phone: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:true,
       },
       guardian_job: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:true,
       },
 
-      school_name:{
+      school_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -132,22 +149,32 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+       school_status:{
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       ijazah_number: {
-        type:  DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       nisn: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      document_id: {
+       major_choice:{
         type:DataTypes.STRING,
+        allowNull:true
+      },
+      upload_document: {
+        type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
-      }
-  }, {
-    sequelize,
-    modelName: 'studentData',
-  });
+      },
+    },
+    {
+      sequelize,
+      modelName: "studentData",
+    }
+  );
   return studentData;
 };

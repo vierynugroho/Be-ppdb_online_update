@@ -7,6 +7,7 @@ module.exports = (allowedRoles) => {
 		try {
 			const user = req.user;
 			if (!user) {
+				console.log("disini?", req.user)
                 return next (new ApiError("Unauthorized", 401))
             }
 			if (!allowedRoles.includes(user_role)) {
@@ -14,6 +15,7 @@ module.exports = (allowedRoles) => {
 			}
 			next();
 		} catch (err) {
+
             next (new ApiError(err.message, 500))
 		}
 	};

@@ -9,7 +9,7 @@ module.exports = {
       studentData.push({
         user_id: i,
         student_name: `student ${i}`,
-        student_gender: 'male',
+        student_gender: 'Laki-laki',
         place_birth: "Jakarta",
         date_birth: "12-12-2015",
         student_address: "Yogyakarta",
