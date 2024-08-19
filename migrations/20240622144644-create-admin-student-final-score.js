@@ -14,11 +14,11 @@ module.exports = {
       },
       health_score: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       interview_score: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       average_final_score: {
         type: Sequelize.FLOAT,

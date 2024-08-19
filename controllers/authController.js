@@ -119,7 +119,11 @@ const login = async (req, res, next) => {
     if (!findUser) {
       return next(new ApiError("User not found", 400));
     }
-    bcrypt.compareSync(password, findUser.password);
+
+    const isPasswordValid = bcrypt.compareSync(password, findUser.password);
+    if (!isPasswordValid) {
+      return next(new ApiError("Invalid email or password", 401));
+    }
     const token = jwt.sign(
       {
         user_id: findUser.user_id,

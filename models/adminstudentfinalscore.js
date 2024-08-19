@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     health_score: {
       type: DataTypes.FLOAT,
-      allowNull:false,
+      allowNull:true,
     },
     interview_score:{
       type: DataTypes.FLOAT,
-      allowNull:false
+      allowNull:true
   },
   average_final_score: {
         type: DataTypes.FLOAT,

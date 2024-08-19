@@ -4,7 +4,7 @@ const { google } = require("googleapis");
 const apiKey = require("../security/apiKey");
 const Readable = require("stream");
 const SCOPE = ["https://www.googleapis.com/auth/drive"];
-
+// const convertDate = require("../utils/convertDate");
 const authorize = async () => {
   const jwtClient = new google.auth.JWT(
     apiKey.client_email,
@@ -103,7 +103,8 @@ const createStudentData = async (req, res, next) => {
     school_address,
     school_status,
     ijazah_number,
-    major_choice,
+    major_choice1,
+    major_choice2,
     nisn,
     mathematics1,
     mathematics2,
@@ -126,6 +127,7 @@ const createStudentData = async (req, res, next) => {
     english4,
     english5,
   } = req.body;
+
   console.log(req.body);
 
   const scores = [
@@ -151,12 +153,19 @@ const createStudentData = async (req, res, next) => {
     english5,
   ];
   console.log(scores);
-  const totalScore = scores.reduce(
-    (acc, score) => acc + (Number(score) || 0),
-    0
-  );
-  console.log("totalnya :", totalScore);
-  const average_report_score = totalScore / scores.length;
+  // const totalScore = scores.reduce(
+  //   (acc, score) => acc + (Number(score) || 0),
+  //   0
+  // );
+  // console.log("totalnya :", totalScore);
+  // const average_report_score = totalScore / scores.length;
+ const validScores = scores.filter((score) => score !== undefined && score !== null);
+
+  // Calculate the total of all valid scores
+  const totalScore = validScores.reduce((acc, score) => acc + Number(score), 0);
+
+  // Calculate the average score
+  const average_report_score = totalScore / validScores.length;
   try {
     const studentDocument = files["studentDocument"];
     const report_score = await studentReportScores.create({
@@ -232,13 +241,17 @@ const createStudentData = async (req, res, next) => {
       .then(upload)
       .catch((err) => console.log(err));
 
+    // const formattedDate_date_birth = convertDate(date_birth);
+    // const formattedDate_father_birth = convertDate(father_birth);
+    // const formattedDate_mother_birth = convertDate(mother_birth);
+    // console.log(formattedDate_date_birth);
     const newStudentData = await studentData.create({
       user_id,
       student_name,
       family_card_number,
       student_gender,
       place_birth,
-      date_birth,
+      date_birth,//: formattedDate_date_birth,
       student_address,
       student_address_now,
       student_distance,
@@ -253,12 +266,12 @@ const createStudentData = async (req, res, next) => {
       father_job,
       father_income,
       place_birth_father,
-      father_birth,
+      father_birth,//: formattedDate_father_birth,
       mother_name,
       mother_job,
       mother_income,
       place_birth_mother,
-      mother_birth,
+      mother_birth, //: formattedDate_mother_birth,
       phoneNumber_house,
       guardian_name,
       guardian_address,
@@ -268,7 +281,8 @@ const createStudentData = async (req, res, next) => {
       school_address,
       school_status,
       ijazah_number,
-      major_choice,
+      major_choice1,
+      major_choice2,
       nisn,
       upload_document: documentId,
     });
@@ -314,7 +328,8 @@ const createStudentData = async (req, res, next) => {
           school_name: newStudentData.school_name,
           school_address: newStudentData.school_address,
           ijazah_number: newStudentData.ijazah_number,
-          major_choice: newStudentData.major_choice,
+          major_choice1: newStudentData.major_choice1,
+          major_choice: newStudentData.major_choice2,
           nisn: newStudentData.nisn,
           upload_document: newStudentData.upload_document,
         },
@@ -350,9 +365,9 @@ const createStudentData = async (req, res, next) => {
   }
 };
 const updateStudentData = async (req, res, next) => {
-  const user_id = 1;
-
+  const id = req.params.id;
   const {
+    user_id,
     student_name,
     family_card_number,
     student_gender,
@@ -387,7 +402,8 @@ const updateStudentData = async (req, res, next) => {
     school_address,
     school_status,
     ijazah_number,
-    major_choice,
+    major_choice1,
+    major_choice2,
     nisn,
     mathematics1,
     mathematics2,
@@ -410,8 +426,8 @@ const updateStudentData = async (req, res, next) => {
     english4,
     english5,
   } = req.body;
+
   try {
-    const id = req.params.id;
     const findStudentData = await studentData.findOne({
       where: {
         id,
@@ -420,93 +436,6 @@ const updateStudentData = async (req, res, next) => {
     if (!findStudentData) {
       return next(new ApiError(`Data with id '${id}' not found`, 404));
     }
-    const findReportScore = await studentReportScores.findOne({
-      where: {
-        id,
-      },
-    });
-    if (!findReportScore) {
-      return next(new ApiError(`Data with id '${id}' not found`, 404));
-    }
-    const scores = [
-      mathematics1,
-      mathematics2,
-      mathematics3,
-      mathematics4,
-      mathematics5,
-      science1,
-      science2,
-      science3,
-      science4,
-      science5,
-      indonesian1,
-      indonesian2,
-      indonesian3,
-      indonesian4,
-      indonesian5,
-      english1,
-      english2,
-      english3,
-      english4,
-      english5,
-    ];
-    // const totalScore = scores.reduce((acc, scores) => acc + scores, 0);
-    const totalScore =
-      mathematics1 +
-      mathematics2 +
-      mathematics3 +
-      mathematics4 +
-      mathematics5 +
-      science1 +
-      science2 +
-      science3 +
-      science4 +
-      science5 +
-      indonesian1 +
-      indonesian2 +
-      indonesian3 +
-      indonesian4 +
-      indonesian5 +
-      english1 +
-      english2 +
-      english3 +
-      english4 +
-      english5;
-    console.log(totalScore);
-    return;
-    const average_report_score = totalScore / scores.length;
-    console.log(average_report_score);
-
-    await studentReportScores.update(
-      {
-        mathematics1,
-        mathematics2,
-        mathematics3,
-        mathematics4,
-        mathematics5,
-        science1,
-        science2,
-        science3,
-        science4,
-        science5,
-        indonesian1,
-        indonesian2,
-        indonesian3,
-        indonesian4,
-        indonesian5,
-        english1,
-        english2,
-        english3,
-        english4,
-        english5,
-        total_report_score: average_report_score,
-      },
-      {
-        where: {
-          id,
-        },
-      }
-    );
     await studentData.update(
       {
         user_id,
@@ -544,8 +473,29 @@ const updateStudentData = async (req, res, next) => {
         school_address,
         school_status,
         ijazah_number,
-        major_choice,
+        major_choice1,
+        major_choice2,
         nisn,
+        mathematics1,
+        mathematics2,
+        mathematics3,
+        mathematics4,
+        mathematics5,
+        science1,
+        science2,
+        science3,
+        science4,
+        science5,
+        indonesian1,
+        indonesian2,
+        indonesian3,
+        indonesian4,
+        indonesian5,
+        english1,
+        english2,
+        english3,
+        english4,
+        english5,
       },
       {
         where: {
@@ -555,7 +505,7 @@ const updateStudentData = async (req, res, next) => {
     );
     const updateData = await studentData.findOne({
       where: {
-        id,
+       id,
       },
     });
     console.log(updateData);
@@ -575,6 +525,261 @@ const updateStudentData = async (req, res, next) => {
     return next(new ApiError(err.message, 400));
   }
 };
+// const updateStudentData = async (req, res, next) => {
+//   const id = req.params.id;
+//   const {
+//     user_id,
+//     student_name,
+//     family_card_number,
+//     student_gender,
+//     place_birth,
+//     date_birth,
+//     student_address,
+//     student_address_now,
+//     student_distance,
+//     student_religion,
+//     student_blood_type,
+//     student_weight,
+//     student_height,
+//     student_child,
+//     student_kps,
+//     student_hobby,
+//     father_name,
+//     father_job,
+//     father_income,
+//     place_birth_father,
+//     father_birth,
+//     mother_name,
+//     mother_job,
+//     mother_income,
+//     place_birth_mother,
+//     mother_birth,
+//     phoneNumber_house,
+//     guardian_name,
+//     guardian_address,
+//     guardian_phone,
+//     guardian_job,
+//     school_name,
+//     school_address,
+//     school_status,
+//     ijazah_number,
+//     major_choice1,
+//     major_choice2,
+//     nisn,
+//     mathematics1,
+//     mathematics2,
+//     mathematics3,
+//     mathematics4,
+//     mathematics5,
+//     science1,
+//     science2,
+//     science3,
+//     science4,
+//     science5,
+//     indonesian1,
+//     indonesian2,
+//     indonesian3,
+//     indonesian4,
+//     indonesian5,
+//     english1,
+//     english2,
+//     english3,
+//     english4,
+//     english5,
+//   } = req.body;
+
+//   try {
+//     const findStudentData = await studentData.findOne({
+//       where: {
+//         id,
+//       },
+//     });
+//     if (!findStudentData) {
+//       return next(new ApiError(`Data with id '${id}' not found`, 404));
+//     }
+//     const findReportScore = await studentReportScores.findOne({
+//       where: {
+//         id,
+//       },
+//     });
+//     if (!findReportScore) {
+//       return next(new ApiError(`Data with id '${id}' not found`, 404));
+//     }
+//     const scores = [
+//       mathematics1,
+//       mathematics2,
+//       mathematics3,
+//       mathematics4,
+//       mathematics5,
+//       science1,
+//       science2,
+//       science3,
+//       science4,
+//       science5,
+//       indonesian1,
+//       indonesian2,
+//       indonesian3,
+//       indonesian4,
+//       indonesian5,
+//       english1,
+//       english2,
+//       english3,
+//       english4,
+//       english5,
+//     ];
+//     // const totalScore = scores.reduce((acc, scores) => acc + scores, 0);
+//     // const totalScore =
+//     //   mathematics1 +
+//     //   mathematics2 +
+//     //   mathematics3 +
+//     //   mathematics4 +
+//     //   mathematics5 +
+//     //   science1 +
+//     //   science2 +
+//     //   science3 +
+//     //   science4 +
+//     //   science5 +
+//     //   indonesian1 +
+//     //   indonesian2 +
+//     //   indonesian3 +
+//     //   indonesian4 +
+//     //   indonesian5 +
+//     //   english1 +
+//     //   english2 +
+//     //   english3 +
+//     //   english4 +
+//     //   english5;
+
+//     // const average_report_score = totalScore / scores.length;
+//     console.log(scores);
+//     const totalScore = scores.reduce(
+//       (acc, score) => acc + (Number(score) || 0),
+//       0
+//     );
+//     console.log("totalnya :", totalScore);
+//     const average_report_score = totalScore / scores.length;
+//     console.log(average_report_score);
+
+//     await studentReportScores.update(
+//       {
+//         user_id,
+//         mathematics1,
+//         mathematics2,
+//         mathematics3,
+//         mathematics4,
+//         mathematics5,
+//         science1,
+//         science2,
+//         science3,
+//         science4,
+//         science5,
+//         indonesian1,
+//         indonesian2,
+//         indonesian3,
+//         indonesian4,
+//         indonesian5,
+//         english1,
+//         english2,
+//         english3,
+//         english4,
+//         english5,
+//         total_report_score: average_report_score,
+//       },
+//       {
+//         where: {
+//           id,
+//         },
+//       }
+//     );
+//     await studentData.update(
+//       {
+//         user_id,
+//         student_name,
+//         family_card_number,
+//         student_gender,
+//         place_birth,
+//         date_birth,
+//         student_address,
+//         student_address_now,
+//         student_distance,
+//         student_religion,
+//         student_blood_type,
+//         student_weight,
+//         student_height,
+//         student_child,
+//         student_kps,
+//         student_hobby,
+//         father_name,
+//         father_job,
+//         father_income,
+//         place_birth_father,
+//         father_birth,
+//         mother_name,
+//         mother_job,
+//         mother_income,
+//         place_birth_mother,
+//         mother_birth,
+//         phoneNumber_house,
+//         guardian_name,
+//         guardian_address,
+//         guardian_phone,
+//         guardian_job,
+//         school_name,
+//         school_address,
+//         school_status,
+//         ijazah_number,
+//         major_choice1,
+//         major_choice2,
+//         nisn,
+//         mathematics1,
+//         mathematics2,
+//         mathematics3,
+//         mathematics4,
+//         mathematics5,
+//         science1,
+//         science2,
+//         science3,
+//         science4,
+//         science5,
+//         indonesian1,
+//         indonesian2,
+//         indonesian3,
+//         indonesian4,
+//         indonesian5,
+//         english1,
+//         english2,
+//         english3,
+//         english4,
+//         english5,
+//       },
+//       {
+//         where: {
+//           id,
+//         },
+//       }
+//     );
+//     const updateData = await studentData.findOne({
+//       where: {
+//        id,
+//       },
+//     });
+//     console.log(updateData);
+//     const updateReport = await studentReportScores.findOne({
+//       where: {
+//         id,
+//       },
+//     });
+//     console.log(updateReport);
+//     res.status(200).json({
+//       status: "Success",
+//       message: "Student Data successfully updated",
+//       requestAt: req.requestTime,
+//       data: { updateReport, updateData },
+//     });
+//   } catch (err) {
+//     return next(new ApiError(err.message, 400));
+//   }
+// };
 const deleteStudentData = async (req, res, next) => {
   try {
     const user_id = req.params.id;

@@ -151,7 +151,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      major_choice:{
+      major_choice1:{
+        type:Sequelize.STRING,
+        allowNull:true
+      },
+      major_choice2:{
         type:Sequelize.STRING,
         allowNull:true
       },

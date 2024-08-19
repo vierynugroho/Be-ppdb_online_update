@@ -161,7 +161,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-       major_choice:{
+       major_choice1:{
+        type:DataTypes.STRING,
+        allowNull:true
+      },
+       major_choice2:{
         type:DataTypes.STRING,
         allowNull:true
       },
