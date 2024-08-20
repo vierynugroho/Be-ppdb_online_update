@@ -40,7 +40,7 @@ const createMajor = async (req, res, next) => {
   try {
     const { major_name, major_description } = req.body;
     const files = req.files;
-    const image = files.major_picture;
+    const image = files.major_picture ? files.major_picture[0] : null;
 
     if (!image) {
       return next(new ApiError("No file uploaded", 422));
@@ -49,7 +49,7 @@ const createMajor = async (req, res, next) => {
     const data = {
       major_name,
       major_description,
-      major_picture: majorPicture.imagesUrl,
+      major_picture: majorPicture,
     };
 
     const newMajor = await Majors.create(data);
