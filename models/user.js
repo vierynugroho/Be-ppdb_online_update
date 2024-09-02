@@ -35,11 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       user_role: {
         type: DataTypes.ENUM('admin','student')
-        
-      },
-      age: {
-        type: DataTypes.STRING,
-        allowNull: false,
       },
   }, {
     sequelize,

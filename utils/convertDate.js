@@ -1,12 +1,29 @@
+// const convertDateTime = (dateTime) => {
+// const dateObject = new Date(dateTime);
+// const day = dateObject.getDate().toString().padStart(2, '0');
+// const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+// const year = dateObject.getFullYear();
+
+// const formattedDate = `${day}-${month}-${year}`;
+
+// console.log(formattedDate); 
+// return formattedDate}
+
+// module.exports = convertDateTime
+
+// convertDateTime.js
 const convertDateTime = (dateTime) => {
-const dateObject = new Date(dateTime);
-const day = dateObject.getDate().toString().padStart(2, '0');
-const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-const year = dateObject.getFullYear();
+  if (!dateTime) return null; // Menangani nilai null atau undefined
 
-const formattedDate = `${day}-${month}-${year}`;
+  const dateObject = new Date(dateTime);
+  if (isNaN(dateObject.getTime())) return null; // Menangani format tanggal yang tidak valid
 
-console.log(formattedDate); 
-return formattedDate}
+  const day = dateObject.getDate().toString().padStart(2, '0');
+  const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+  const year = dateObject.getFullYear();
 
-module.exports = convertDateTime
+  const formattedDate = `${day}-${month}-${year}`;
+  return formattedDate;
+};
+
+module.exports = convertDateTime;

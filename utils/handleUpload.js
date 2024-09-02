@@ -1,11 +1,12 @@
 const imageKit = require('../libs/imageKit');
 
-const handleUploadImage = async (files) => {
+const handleUploadImage = async (file) => {
 	let imagesUrl = [];
 	let imagesId = [];
 
 	await Promise.all(
-		files.map(async (file) => {
+    
+		file.map(async (file) => {
 			const split = file.originalname.split('.');
 			const extension = split[split.length - 1];
 
@@ -14,6 +15,8 @@ const handleUploadImage = async (files) => {
 				fileName: `user-${Date.now()}.${extension}`,
 				folder: "Database",
 			});
+      // console.log(uploadedImage);
+
 
 			imagesUrl.push(uploadedImage.url);
 			imagesId.push(uploadedImage.fileId);
@@ -24,3 +27,5 @@ const handleUploadImage = async (files) => {
 };
 
 module.exports = handleUploadImage;
+
+

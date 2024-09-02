@@ -13,3 +13,4 @@ const upload = multerConfig.fields([
 ]);
 
 module.exports = upload;
+

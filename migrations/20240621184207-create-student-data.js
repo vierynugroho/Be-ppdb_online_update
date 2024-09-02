@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      student_card_number:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       student_gender: {
         type: Sequelize.ENUM(["Laki-laki", "Perempuan"]),
         allowNull: true,

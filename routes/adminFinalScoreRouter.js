@@ -4,6 +4,7 @@ const authentication = require('../middlewares/authentication');
 const CheckRole = require('../middlewares/role');
 
 router.get('/', finalScore.getAllFinalScores);
+router.get('/studentPassed', finalScore.getAllStudentPassed);
 router.post('/',  authentication, finalScore.createFinalScore);
 router.patch('/update/:id',  finalScore.updateFinalScore);
 router.delete('/delete/:id', finalScore.deleteFinalScore);

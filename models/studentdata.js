@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         type:DataTypes.STRING,
         allowNull: false,
       },
+      student_card_number: {
+        type:DataTypes.STRING,
+        allowNull: false,
+      },
       student_gender: {
         type: DataTypes.ENUM(["Laki-laki", "Perempuan"]),
         allowNull: true,

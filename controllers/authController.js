@@ -45,7 +45,7 @@ const getUserById = async (req, res, next) => {
 };
 const register = async (req, res, next) => {
   try {
-    const { full_name, age, user_role, email, password, confirm_password } =
+    const { full_name, user_number,user_role, password, confirm_password } =
       req.body;
     const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(password, saltRounds);
@@ -56,7 +56,7 @@ const register = async (req, res, next) => {
       const newUser = await User.create(
         {
           full_name,
-          age,
+          user_number,
           user_role,
         },
         { transaction }
@@ -65,7 +65,7 @@ const register = async (req, res, next) => {
       const auth = await Auth.create(
         {
           user_id: newUser.id,
-          email,
+          user_number,
           password: hashedPassword,
           confirm_password: hashedConfirmPassword,
         },
@@ -79,15 +79,15 @@ const register = async (req, res, next) => {
         data: {
           user: {
             id: newUser.id,
-            name: newUser.full_name,
-            age: newUser.age,
+            full_name: newUser.full_name,
+            user_number: newUser.user_number,
             user_role: newUser.user_role,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt,
           },
           auth: {
             user_id: newUser.id,
-            email: auth.email,
+            user_number: auth.user_number,
             password: hashedPassword,
             createdAt: auth.createdAt,
             updatedAt: auth.updatedAt,
@@ -104,15 +104,15 @@ const register = async (req, res, next) => {
 };
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { user_number, password } = req.body;
     console.log(req.body);
 
-    if (!email || !password) {
-      return next(new ApiError("Please enter email or password", 400));
+    if (!user_number || !password) {
+      return next(new ApiError("Please enter user_number or password", 400));
     }
     const findUser = await Auth.findOne({
       where: {
-        email,
+        user_number,
       },
       include: ["User"],
     });
@@ -122,14 +122,14 @@ const login = async (req, res, next) => {
 
     const isPasswordValid = bcrypt.compareSync(password, findUser.password);
     if (!isPasswordValid) {
-      return next(new ApiError("Invalid email or password", 401));
+      return next(new ApiError("Invalid user_number or password", 401));
     }
     const token = jwt.sign(
       {
         user_id: findUser.user_id,
         full_name: findUser.User.full_name,
         user_role: findUser.User.user_role,
-        email: findUser.email,
+        user_number: findUser.user_number,
       },
       process.env.JWT_SECRET,
       {

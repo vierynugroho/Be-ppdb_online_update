@@ -24,6 +24,19 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
+
+      final_result: {
+        type: Sequelize.ENUM('Diterima','Tidak diterima'),
+        allowNull: true,
+      },
+      major_result: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      result_description: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

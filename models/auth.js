@@ -20,15 +20,12 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			email: {
+			user_number: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				unique: {
 					args: true,
-					msg: 'Email is already been taken',
-				},
-				validate: {
-					isEmail: true,
+					msg: 'NISN is already been taken',
 				},
 			},
 			password: {

@@ -33,6 +33,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull:true
       },
+  final_result: {
+        type: DataTypes.ENUM('Diterima','Tidak diterima'),
+        allowNull:true
+      },
+  major_result: {
+        type: DataTypes.STRING,
+        allowNull:true
+      },
+  result_description: {
+        type: DataTypes.STRING,
+        allowNull:true
+      },
   }, {
     sequelize,
     modelName: 'AdminStudentFinalScore',
