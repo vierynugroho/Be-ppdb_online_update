@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "data-siswa-429915",
+  "private_key_id": "d8522a7b62cf357f191eeb56c9273ed9c8dd1177",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC1Lbq7WuGQ52sg\nvH7IXtB7+m7TIgTf1VSzCBHH6w3UYqEGDfltZr0MSfBMJaAHO0oJ7CkOa6U18t1O\nX9EN0QcwDwdcY3/s6ffETCNtWBCeRUiS+t5zuI45iDp+Lqd5Cfk2acsNAfJwuDjI\n99D599dZvbSiry1SpyWi+pps58+8kbM5oNh4L5uan6tYxmoIk29+ex5b2wySTR3O\n5jqLq4IAWiL8Ut5l2GCrHR60imx65MX4cWZGaPjP3BqlK4+SUzWA0TTQd6QA4RS6\nSjtqyt+dDXXq8qyHp5zqguyok5eHgSTLEzj5507tBu+VNTiI6WecoGhX8ZSn809K\n7dOv/8DvAgMBAAECggEAB+JpkeWuk0O+4bnSOp4FrJ+FWyLL24HJIdFkFLMh8vAn\n2b+Z7yzdZT+CeY3ZnPbzjeL9FmeQ1PwwrUx2KIfELE87HsYltwWnhp9Zm1SNxJV3\nRw4ryBVr+wz2nq8hEp9gfQG1mGdRSZ56uiQur/IdKQacacf9zO8BMEp/leWwoKAT\np5n39F0cvX9yZnmvQNraVOJs5rJRyY3LeKrrTqrNxPTzvtiK1tGqLd/9NMjX8vo1\nA+Hj2CC6Trut0DzGmz6vpuhAFtUPGY6YFdwzC2+ZvaS/MWuea1mT0W0J0vGm9y52\nCtO9tCxtWNFJWrMXfaqMq9onZpMGbVBkfO3TBeNEYQKBgQD194qjM/LTcNwloK8L\nZZPdaLBnInWX42P3MFY63V/NYTdQ14SaOMB7UR04LTLFx/dBMNukP9/zvms77AaO\nyn42g4X4NbevYb+a8Dn880YK6QWr0XJRrqHfENOIKx9uRF36ojJG1o5sCyVg/1XZ\nkdjzFbpxYXyAzUiEjveHSoQYnQKBgQC8kaY5uYzAB6M3oi6NcZ6zgABpkcqp1V2/\ntguDTvV+yUJamXhNkZTBIRNfGUpM9BSnx1L/9ZvUpTCNOis16ucMIZD7VyVkaMNC\nGKtFUky2ym1TD44DVUCzKxycJND7lqrGOqvCZICamjHJ1E56iyrQlhVtBgmiAYzU\nT1KT31pr+wKBgQDmuMwYKOuXgR9QQHjSJPdd0gzewYky777eqT3Ju8xY199OestM\n6v1K75yMDIG62sdJJG5zlOMbPbxTGiRQnwtjUV5CpQjnf7Z+vOZ4Ky7BnzGNqUsl\n6by3hI4YBfNWuNS6/JhSsIIqQQ5P/VNnYhLyeqhIIJzsKSPkDEOOacydVQKBgDkx\n3D9J/l0IdAMd2Azi14YOXxGmPNhCdUr+xoMvYdrw5IViY1DzxTDG/X8sxpKMve8d\n0Bj+wCNBb3aGnDCgbTAKxlTV2+uWsxLLNLez/Ly8rWgyIZr1MsilXOonaJPG4Ul6\n5jnyDefWuR9EnAEjUPsvapRE7osK+VI0NRHQ/zYdAoGBALD/n9eqLkrRa3OYHRdO\njvbB9Gng7n8Ed9nuVHTaX92BE/CfQIG+oEwsbk8nphFMlAUullmA/XfSXiD399/k\n6VZXBoW49TQCTK42RMaCqlq9q4gnZpA12gkhWFK+ileVDH+s1imT0Xa46gWcFZyZ\n6LTmjjsotjNcmDx2Eu0DlNKR\n-----END PRIVATE KEY-----\n",
+  "client_email": "data-siswa@data-siswa-429915.iam.gserviceaccount.com",
+  "client_id": "116095648905163343357",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/data-siswa%40data-siswa-429915.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
