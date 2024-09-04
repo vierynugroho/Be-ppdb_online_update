@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull:true
       },
   final_result: {
-        type: DataTypes.ENUM('Diterima','Tidak diterima'),
+        type: DataTypes.ENUM('Diterima', 'Tidak diterima','Dipertimbangkan'),
         allowNull:true
       },
   major_result: {

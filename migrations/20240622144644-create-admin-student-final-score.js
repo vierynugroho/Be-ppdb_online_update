@@ -26,7 +26,7 @@ module.exports = {
       },
 
       final_result: {
-        type: Sequelize.ENUM('Diterima','Tidak diterima'),
+        type: Sequelize.ENUM('Diterima','Tidak diterima', 'Dipertimbangkan'),
         allowNull: true,
       },
       major_result: {

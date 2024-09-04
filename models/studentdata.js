@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      student_picture: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false,
+      defaultValue: "default.png",
+    },
       student_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -93,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       father_income:{
-        type: DataTypes.INTEGER, 
+        type: DataTypes.STRING, 
         allowNull: false,
       },
       place_birth_father: {
@@ -109,7 +114,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
        mother_income:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
        },
       mother_job: {

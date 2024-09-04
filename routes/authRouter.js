@@ -7,5 +7,4 @@ const { register, login, getUser, getUserById } = require('../controllers/authCo
 router.post('/login', login);
 router.post('/register', register);
 router.get('/me/:id', Authenticate, CheckRole(['admin', 'student']), getUserById)
-
 module.exports = router;

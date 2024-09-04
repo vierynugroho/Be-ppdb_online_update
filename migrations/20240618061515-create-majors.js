@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       major_description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       major_picture: {

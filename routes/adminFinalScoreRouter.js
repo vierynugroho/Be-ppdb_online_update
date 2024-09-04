@@ -1,12 +1,10 @@
 const router = require('express').Router();
-const finalScore = require('../controllers/adminFinalScoreController');
-const authentication = require('../middlewares/authentication');
+const Authenticate = require('../middlewares/authentication');
 const CheckRole = require('../middlewares/role');
+const {getAllFinalScores, getAllStudentPassed, updateFinalScore} = require('../controllers/adminFinalScoreController')
 
-router.get('/', finalScore.getAllFinalScores);
-router.get('/studentPassed', finalScore.getAllStudentPassed);
-router.post('/',  authentication, finalScore.createFinalScore);
-router.patch('/update/:id',  finalScore.updateFinalScore);
-router.delete('/delete/:id', finalScore.deleteFinalScore);
+router.get('/', Authenticate, CheckRole(['admin']), getAllFinalScores);
+router.get('/studentPassed', Authenticate, CheckRole(['admin']), getAllStudentPassed);
+router.patch('/update/:id',  Authenticate, CheckRole(['admin']),updateFinalScore);
 
 module.exports = router;

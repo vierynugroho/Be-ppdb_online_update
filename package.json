@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "db-create": "sequelize db:create",
     "db-drop": "sequelize db:drop",
     "db-migrate": "sequelize db:migrate",

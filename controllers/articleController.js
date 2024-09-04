@@ -18,11 +18,12 @@ const getAllArticle = async (req, res, next) => {
 const createArticle = async (req, res, next) => {
     try {
         const {article_name, article_description} = req.body;
-
+      console.log("REQQ",req.body);
 
         const newArticle = await Article.create({
             article_name, article_description
         });
+        // console.log(newArticle);
         res.status(200).json({
             status: "Success",
             message: "Article successfully created",

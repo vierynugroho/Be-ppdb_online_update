@@ -17,6 +17,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      student_picture: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+      defaultValue: "default.png",
+    },
       family_card_number:{
         type: Sequelize.STRING,
         allowNull: false,
@@ -87,7 +92,7 @@ module.exports = {
         allowNull: false,
       },
       father_income:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       place_birth_father: {
@@ -107,7 +112,7 @@ module.exports = {
         allowNull: false,
       },
       mother_income:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       place_birth_mother: {
