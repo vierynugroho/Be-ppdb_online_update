@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js",
+    "start": "node index.js",
     "db-create": "sequelize db:create",
     "db-drop": "sequelize db:drop",
     "db-migrate": "sequelize db:migrate",
@@ -42,7 +42,7 @@
     "nodemon": "^3.1.0",
     "path": "^0.12.7",
     "pdf-parse": "^1.1.1",
-    "pg": "^8.11.5",
+    "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3",
     "sequelize-cli": "^6.6.2",
