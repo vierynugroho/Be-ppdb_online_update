@@ -10,11 +10,12 @@ const apiKey = require("../security/apiKey");
 const Readable = require("stream");
 const SCOPE = ["https://www.googleapis.com/auth/drive"];
 const convertDate = require("../utils/convertDate");
+
 const authorize = async () => {
   const jwtClient = new google.auth.JWT(
-    apiKey.client_email,
+    process.env.CLIENT_EMAIL,
     null,
-    apiKey.private_key,
+    process.env.PRIVATE_KEY,
     SCOPE
   );
   return jwtClient;
@@ -278,7 +279,7 @@ const createStudentData = async (req, res, next) => {
       major_choice2,
       nisn,
       upload_document: documentId,
-      student_picture: studentPicture.imagesUrl
+      student_picture: studentPicture.imagesUrl,
     });
     const report_score = await studentReportScores.create({
       user_id,
