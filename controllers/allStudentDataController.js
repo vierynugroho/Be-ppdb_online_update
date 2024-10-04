@@ -6,7 +6,6 @@ const {
 const handleUploadImage = require("../utils/handleUpload");
 const ApiError = require("../utils/apiError");
 const { google } = require("googleapis");
-const apiKey = require("../security/apiKey");
 const Readable = require("stream");
 const SCOPE = ["https://www.googleapis.com/auth/drive"];
 const convertDate = require("../utils/convertDate");
